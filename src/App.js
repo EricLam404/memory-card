@@ -5,7 +5,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   return (
-    <div className="App">
+    <div className="app">
       <div id="header">
         <div id= "header-left">
           <div id="header-title">
