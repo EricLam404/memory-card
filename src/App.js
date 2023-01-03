@@ -1,23 +1,31 @@
 import './App.css';
 import { useState } from 'react';
+import Header from './header';
+import Cards from './cards';
 
 function App() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const increaseScore = () => {
+    setScore(score + 1);
+  };
+  const checkBestscore = (s) => {
+    if (bestScore < s) {
+      setBestScore(s);
+    }
+  };
+  const resetScore = () => {
+    setScore(0);
+  };
+
   return (
     <div className="app">
-      <div id="header">
-        <div id= "header-left">
-          <div id="header-title">
-            <h1>Memory Game</h1>
-          </div>
-          <div>Get points by clicking on an a new image! The game ends if you clicked on an image you previously  clicked</div>
-        </div>
-        <div id= "header-right">
-          <div>Score: {score}</div>
-          <div>Best Score: {bestScore}</div>
-        </div>
-      </div>
+      <Header score={score} bestScore={bestScore}/>
+      <Cards 
+        increaseScore={increaseScore}
+        checkBestscore={checkBestscore}
+        resetScore={resetScore}
+      />
     </div>
   );
 }
