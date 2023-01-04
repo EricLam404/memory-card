@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 function Cards(props) {
     const [clickedCards, setClickedCards] = useState([]);
     const shuffledCards = createCards(10);
+    shuffle();
     
     useEffect(() => {
         shuffle();
@@ -19,10 +20,13 @@ function Cards(props) {
         return arr;
     }
     function shuffle() {
+        console.table(shuffledCards);
+        console.log("-------------")
         for (let i = shuffledCards.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
-        }        
+        }
+        console.table(shuffledCards);
     }
     function handleClick(e) {
         const clickedCardId = Number(e.target.id);
