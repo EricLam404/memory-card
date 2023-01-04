@@ -9,11 +9,13 @@ function App() {
   const increaseScore = () => {
     setScore(score + 1);
   };
+  
   const checkBestscore = (s) => {
     if (bestScore < s) {
       setBestScore(s);
     }
   };
+
   const resetScore = () => {
     setScore(0);
   };

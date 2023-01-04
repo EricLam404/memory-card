@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 function Cards(props) {
-    const [cards, setCards] = useState(createCards(10));
+    const [clickedCards, setClickedCards] = useState([]);
+    const shuffledCards = createCards(10);
     
     useEffect(() => {
         shuffle();
-    }, []);
+    });
       
 
     function createCards(length){
@@ -13,35 +14,34 @@ function Cards(props) {
         for(let i = 0; i < length; i++){
             arr.push({
                 id: i,
-                clicked: false,
             });
         }
         return arr;
     }
     function shuffle() {
-        const shuffledCards = [...cards];
         for (let i = shuffledCards.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
-        }
-        setCards(shuffledCards);
+        }        
     }
-      
     function handleClick(e) {
         const clickedCardId = Number(e.target.id);
-        const updatedCards = cards.map((card) => {
-            if (card.id === clickedCardId) {
-                return { ...card, clicked: true };
+        for(let i = 0; i < shuffledCards.length; i++){
+            if(clickedCards[i] === clickedCardId){
+                props.checkBestscore(clickedCards.length);
+                props.resetScore();
+                setClickedCards([]);
+                return
             }
-            return card;
-        });
-        setCards(updatedCards);
-        shuffle();
-    }
-      
+        }
+        const arr = [...clickedCards];
+        arr.push(clickedCardId);
+        setClickedCards(arr);
+        props.increaseScore();
+    }  
     return (
         <div id="cards">
-            {cards.map((card) => {
+            {shuffledCards.map((card) => {
                 return(
                     <div className="card" id={card.id} key={card.id} onClick={(e) => handleClick(e)}>
                         {card.id}
