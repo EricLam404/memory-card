@@ -27,9 +27,18 @@ function Cards(props) {
         setCards(shuffledCards);
     }
       
-    function handleClick(e){
-
+    function handleClick(e) {
+        const clickedCardId = Number(e.target.id);
+        const updatedCards = cards.map((card) => {
+            if (card.id === clickedCardId) {
+                console.log(card)
+                return { ...card, clicked: true };
+            }
+            return card;
+        });
+        setCards(updatedCards);
     }
+      
     return (
         <div id="cards">
             {cards.map((card) => {
