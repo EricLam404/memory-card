@@ -31,12 +31,12 @@ function Cards(props) {
         const clickedCardId = Number(e.target.id);
         const updatedCards = cards.map((card) => {
             if (card.id === clickedCardId) {
-                console.log(card)
                 return { ...card, clicked: true };
             }
             return card;
         });
         setCards(updatedCards);
+        shuffle();
     }
       
     return (
