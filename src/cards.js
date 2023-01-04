@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Card from "./card";
 
 function Cards(props) {
     const [clickedCards, setClickedCards] = useState([]);
